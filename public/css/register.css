@@ -1,0 +1,72 @@
+/* Page d'inscription */
+.title-app {
+    display: none;
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.card {
+    background-color: #ECF8F6;
+    color: #000000;
+    border-radius: 5px;
+    width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    width: 80%;
+}
+
+input[type="text"],
+input[type="password"] {
+    border-radius: 3px;
+    padding: 10px;
+    border-color: #18534F;
+    margin-bottom: 10px;
+    width: 94%;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btn {
+    background-color: #18534F;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #ECF8F6;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: medium;
+}
+
+.agree-terms-row {
+    display: flex;
+    align-items: center;
+}
+
+.agree-terms-row label {
+    margin: 0;
+    margin-right: 5px;
+}
+
+

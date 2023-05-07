@@ -1,0 +1,18 @@
+<nav class="navbar">
+    <a href="{{ path('main_home') }}" class="logo">
+        <img class="img_logo" src="{{ asset('images/logo_site.png') }}" alt="Logo La Gallerie Du Rire">
+    </a>
+    <input type="checkbox" id="toggler">
+    <label for="toggler"><i class="ri-menu-line"></i></label>
+    <div class="menu">
+        <ul class="list">
+            <li>
+                <a class="nav-link" href="{{ path('main_home') }}">Accueil</a>
+                {% if app.user %}
+            <a class="nav-link" href="{{ path('main_profil', {'id': app.user.id}) }}">{{ app.user.pseudo }}</a>
+            <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>

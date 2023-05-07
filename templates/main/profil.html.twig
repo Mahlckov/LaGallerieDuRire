@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="cards">
+    <div class="card">
+    <div class="card-form">
+        <div class="form">
+                    <h1 class="text-center">Profil de {{ humouriste.pseudo }}</h1>
+            <div class="img-profil round-img">
+                    {% if humouriste.nomImage %}
+                        <img  src="{{ asset('uploads/images/' ~ humouriste.nomImage) }}" alt="Image de | {{ humouriste.nom}}" class="img-profil round-img" style="max-width: 200px; max-height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="{{ asset('images/icone_profil_unknown.png') }}" alt="photo profil par défaut" style="max-width: 200px; max-height: 200px; object-fit: cover;">
+                    {% endif %}
+            </div>
+                    {% if humouriste == app.user %}
+                        <div class="mx-auto form-container" >
+                            {{ form_start(ProfileForm, {'attr': {'class': 'mx-auto'}}) }}
+                            {{ form_row(ProfileForm.pseudo) }}
+                            {{ form_row(ProfileForm.prenom) }}
+                            {{ form_row(ProfileForm.nom) }}
+                            {{ form_row(ProfileForm.email) }}
+                            {{ form_row(ProfileForm.nomImage) }}
+                            {{ form_row(ProfileForm.plainPassword) }}
+                            <div class="card-buttons">
+                                <button class="btn btn-success" type="submit">Enregistrer</button>
+                                <a href="{{ path('main_home') }}"><button class="btn btn-warning" type="button">Annuler</button></a>
+                                {{ form_end(ProfileForm) }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>Pseudo: {{ humouriste.pseudo }}</p>
+                        <p>Email: {{ humouriste.email }}</p>
+
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <p>Etat du compte : {{ humouriste.actif ? 'Actif' : 'Désactivé' }}</p>
+                            <a href="{{ path('admin_suppression', {'id': humouriste.id}) }}">
+                                <button class="btn btn-danger" type="submit" onclick="confirmer(this.href, 'supprimer')">Supprimer ce compte</button>
+                            </a>
+                            {% if humouriste.actif %}
+                                <a href="{{ path('admin_desactivation', {'id': humouriste.id}) }}" onclick="confirmer(this.href, 'suspendre'); return false;">
+                                    <button class="btn btn-warning" type="submit">Suspendre ce compte</button>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('admin_reactivation', {'id': humouriste.id}) }}">
+                                    <button class="btn btn-primary" type="submit">Réactiver ce compte</button>
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+        {% if humouriste == app.user %}
+            <div class="card">
+                <div class="form">
+                        <h1>Modifier votre mot de passe</h1>
+                        {{ form_start(MdpForm, {'attr': {'class': 'mx-auto'}}) }}
+                        {{ form_row(MdpForm.currentPassword) }}
+                        {{ form_row(MdpForm.newPassword) }}
+                    <div class="card-buttons">
+                    <button class="card-buttons btn btn-success" type="submit">Enregistrer</button>
+                        {{ form_end(MdpForm) }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </section>
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/ConfirmerAction.js') }}"></script>
+    {% endblock %}
+{% endblock %}

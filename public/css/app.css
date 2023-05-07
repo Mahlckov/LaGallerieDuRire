@@ -1,0 +1,69 @@
+
+body {
+    background-color: #18534F;
+    font-family: 'Open Sans', sans-serif;
+
+}
+.title-app {
+    text-align: center;
+    color: #ECF8F6;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #26474E;
+    text-align: center;
+    color: #ECF8F6;
+    padding: 10px;
+    margin-top: 100px;
+}
+
+/* Page de login */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+}
+
+.card {
+    background-color: #ECF8F6;
+    color: #000000;
+    border-radius: 5px;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    border-radius: 3px;
+    padding: 10px;
+    border-color: #18534F;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btn-login {
+    background-color: #18534F;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    color: #ECF8F6;
+    cursor: pointer;
+}

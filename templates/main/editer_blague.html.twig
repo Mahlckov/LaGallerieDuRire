@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Groupes | {{ parent() }}
+{% endblock %}
+{% block body %}
+<h1>Modifier une blague</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+
+<h2>Blagues:</h2>
+<ul>
+    {% for blague in form.blagues %}
+
+            {{ form_widget(blague) }}
+            {{ form_label(blague) }}
+
+    {% endfor %}
+</ul>
+
+    {{ form_widget(form) }}
+    <a  href="{{ path('/blague/editer', {'id': blague.id}) }}">
+        <button class="btn btn-lg btn-warning" type="submit">Modifier</button>
+    </a>
+
+
+{{ form_end(form) }}
+    <a href="{{ path('app_list_blagues') }}">
+        <button class="btn btn-lg btn-primary">Annuler</button>
+    </a>
+
+
+{% endblock %}
+
+

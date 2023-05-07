@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1 style="text-align: center">Gestion des humouristes</h1>
+
+    <h2>Filtrer : </h2>
+
+    {{ form_start(SearchForm) }}
+    {{ form_widget(SearchForm.q,{ 'attr': {'class': 'formFilterInline'} }) }}
+
+    <button class="btn btn-lg btn-success" type="submit">Go</button>
+    {{ form_end(SearchForm, {'render_rest': false}) }}
+
+    <table class="table table-hover table-responsive table-striped text-center" style="display: grid; height:50rem;overflow-y: scroll">
+        <tr>
+
+            <th>
+                Humouristes : Pseudo
+            </th>
+            <th class="d-none d-sm-table-cell">
+                Prénom
+            </th>
+            <th class="d-none d-sm-table-cell">
+                Nom
+            </th>
+            <th class="d-none d-md-table-cell">
+                Email
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        {% for h in humouristes %}
+            <div>
+                <tr>
+                    <td class="col-md-2">
+                            <a href="{{ path('',{'id': p.id}) }}">{{ p.pseudo }}</a>
+                    </td>
+                    <td class="col-md-2 d-none d-sm-table-cell">
+                        {{ p.prenom }}
+                    </td>
+                    <td class="col-md-2 d-none d-sm-table-cell">
+                        {{ p.nom }}
+                    </td>
+                    <td class="col-md-2 d-none d-md-table-cell">
+                        {{ p.email }}
+                    </td>
+                    <td class="col-md-2">
+                        {{ p.campus }}
+                    </td>
+
+                    <td class="col-md-2">
+                        <a
+                                {% if p.actif == 1 %}
+                                    href="{{ path('desactivation',{'id': p.id}) }}"
+                                    onclick="confirmer(this.href, 'suspendre'); return false;">
+                                    Suspendre
+                                {% endif %}
+
+                            {% if p.actif == 0 %}
+                                href="{{ path('reactivation',{'id': p.id}) }}">Réactiver {% endif %}
+                        </a>
+                        <span> - </span>
+                        <a href="{{ path('suppression',{'id': p.id}) }}"
+                           onclick="confirmer(this.href, 'supprimer'); return false;">
+                            Supprimer
+                        </a>
+                </tr>
+            </div>
+        {% endfor %}
+    </table>
+
+    <script src="{{ asset('js/ConfirmerAction.js') }}"></script>
+
+{% endblock %}
+
+
+{% block title %}
+    Page des participants | {{ parent() }}
+{% endblock %}
