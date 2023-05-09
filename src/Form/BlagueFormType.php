@@ -20,7 +20,7 @@ class BlagueFormType extends AbstractType
                 'label' => 'Titre de la blague',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description','required'=> false
+                'label' => 'Description/Réponse','required'=> false
             ])
             ->add('nomMeme', FileType::class, [
                 'label' => 'Votre meme',

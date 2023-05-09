@@ -49,6 +49,11 @@ class Blague
      */
     private $humouriste;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datePublication;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +103,23 @@ class Blague
     public function setHumouriste(?Humouriste $humouriste): self
     {
         $this->humouriste = $humouriste;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->datePublication = new \DateTime();
+    }
+
+    public function getDatePublication(): ?\DateTimeInterface
+    {
+        return $this->datePublication;
+    }
+
+    public function setDatePublication(\DateTimeInterface $datePublication): self
+    {
+        $this->datePublication = $datePublication;
 
         return $this;
     }

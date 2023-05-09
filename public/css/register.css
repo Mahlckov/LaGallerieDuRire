@@ -6,12 +6,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: min-content;
 }
 
 .card {
     background-color: #ECF8F6;
-    color: #000000;
     border-radius: 5px;
     width: 450px;
     margin: 0 auto;
@@ -69,4 +68,10 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 
+ul li{
+    color: #c92222;
+}
 
+.form-group.has-error input {
+    border-color: red;
+}

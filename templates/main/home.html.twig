@@ -1,12 +1,50 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/home_liste_blagues.css') }}">
+{% endblock %}
 {% block title %} Page d'accueil {% endblock %}
 
 {% block body %}
 
-    <h2 class="d-none d-sm-inline">Filtrer les Blagues : </h2>
-    <h2 class="d-sm-none">Les dernières blagues : </h2>
+    <h2>Filtrer les Blagues : </h2>
+    <div class="search-form">
+        {{ form_start(SearchForm) }}
+        {{ form_widget(SearchForm.q,{ 'attr': {'class': 'formFilterInline'} }) }}
+        <button type="submit" class="btn-success">Rechercher</button>
+        {{ form_end(SearchForm) }}
 
+    </div>
+    <a href="{{ path('nouvelle_blague') }}">
+        <button class="btn-success">Créer une nouvelle blague </button>
+    </a>
+    <h2>Les dernières blagues : </h2>
+    <div class="row">
+        {% if blagues is not empty %}
+            {% for blague in blagues %}
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <div class="card-header">{{ blague.humouriste.pseudo }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ blague.libelle }}</h5>
+                            {% if blague.description %}
+                                <p class="card-text">{{ blague.description }}</p>
+                            {% endif %}
+                            {% if blague.nomMeme %}
 
+                            {{ form_row(form.nomMeme) }}
+                            {% if form.nomMeme.vars.value %}
+                                <img src="{{ asset('uploads/memes/' ~ blague.nomMeme) }}" alt="Meme | {{ blague.libelle}}" style="max-width: 200px; max-height: 200px; object-fit: cover;">
 
+                                {#  <img src="{{ asset('uploads/memes/' ~ form.nomMeme.vars.value) }}" class="img-fluid">#}
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucune blague trouvée</p>
+        {% endif %}
+    </div>
 {% endblock %}

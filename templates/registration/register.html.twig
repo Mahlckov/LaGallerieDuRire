@@ -13,12 +13,19 @@
             <form method="post">
                 <h1>Je rejoins la Gallerie Du Rire !</h1>
 
-                {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.pseudo) }}
-                {{ form_row(registrationForm.prenom) }}
-                {{ form_row(registrationForm.nom) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_start(registrationForm, {'attr': {'class': 'registration-form'}}) }}
+                {{ form_row(registrationForm.pseudo, {'attr': {'class': registrationForm.pseudo.vars.errors|length ? 'has-error' }}) }}
+                {{ form_row(registrationForm.prenom, {'attr': {'class': registrationForm.prenom.vars.errors|length ? 'has-error' }}) }}
+                {{ form_row(registrationForm.nom, {'attr': {'class': registrationForm.nom.vars.errors|length ? 'has-error' }}) }}
+                {{ form_row(registrationForm.email, {'attr': {'class': registrationForm.email.vars.errors|length ? 'has-error' }}) }}
+                {{ form_row(registrationForm.plainPassword, {'attr': {'class': registrationForm.plainPassword.vars.errors|length ? 'has-error' }}) }}
+
+
+                {% for field, errors in registrationForm.vars.errors %}
+                    {% for error in errors %}
+                        <div class="form-error-message">{{ error }}</div>
+                    {% endfor %}
+                {% endfor %}
 
                 <div class="agree-terms-row">
                     {{ form_widget(registrationForm.agreeTerms) }}
@@ -33,3 +40,5 @@
         </div>
     </div>
 {% endblock %}
+
+

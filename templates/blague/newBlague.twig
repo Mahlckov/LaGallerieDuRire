@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container card-container">
+        <div class="card">
+            <form method="post">
+                {% if app.user %}
+                <h1>Création d'une nouvelle blague !</h1>
+                    <div class="mx-auto form-container" >
+                        {{ form_start(form, {'attr': {'class': 'mx-auto'}}) }}
+                        {{ form_row(form.libelle) }}
+                        {{ form_row(form.description) }}
+                        {{ form_row(form.nomMeme) }}
+                        <div class="card-buttons">
+                            <button class="btn btn-success" type="submit">Publier</button>
+                            <a href="{{ path('main_home') }}"><button class="btn btn-warning" type="button">Annuler</button></a>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

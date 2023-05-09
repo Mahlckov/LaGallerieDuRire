@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Humouriste;
 use App\Form\ProfilChangePasswordFormType;
 use App\Form\ProfilFormType;
+use App\Form\SearchForm;
+use App\Repository\BlagueRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -20,10 +23,21 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home", methods={"GET"})
      */
-    public function index(): Response {
+    public function listeBlagues(Request $request,BlagueRepository $blagueRepository)
+    :response{
+        //Creation du formulaire de la barre de recherche
+        $search = new SearchData();
+        $searchForm = $this->createForm(SearchForm::class,$search);
+        $searchForm->handleRequest($request);
 
-        return $this->render('main/home.html.twig');
-        }
+        //Recherche des blagues (si critères => dans variable search)
+        $listeBlagues=$blagueRepository->findBlagues($search);
+
+
+        return $this->render('main/home.html.twig', [
+            'blagues' => $listeBlagues,
+            'SearchForm' => $searchForm->createView()]);
+    }
 
     /**
      * @Route("/profil/{id}", name="main_profil", requirements={"id"="\d+"})

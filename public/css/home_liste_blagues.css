@@ -1,0 +1,58 @@
+/* Page home avec liste de blagues */
+
+.search-form input[type="text"] {
+    max-width: 200px; /* définir la largeur maximale souhaitée */
+}
+
+.btn-success {
+    color: #218838;
+    background-color: #9bda9c;
+    border-color: #000000;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.blague-card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    flex-grow: 1;
+    width: 90%;
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+.blague-card-humouriste {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blague-card-titre {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.blague-card-subtitle {
+    font-size: 40px;
+    margin: 0;
+}
+
+.blague-card-body {
+    margin: 0;
+}
+
+.blague-card-text {
+    font-size: 16px;
+    margin: 0;
+}
